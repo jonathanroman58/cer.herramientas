@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { MenuController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 
@@ -19,12 +20,13 @@ export class HomePage {
   cont: number = 0;
   posit: any;
   test: any;
+  funtionmenu: any;
  codigo1: any;
  codigo2: any;
  codigo3: any;
  codigo4: any;
  codigo5: any;
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(public navCtrl: NavController, public http: Http,public menuCtrl: MenuController) {
 
     this.http.get('https://menus-a041d.firebaseio.com/Menus.json').map(res => res.json()).subscribe(data => {
       this.posts = data;
@@ -39,6 +41,7 @@ export class HomePage {
       this.codigo3="2";
       this.codigo4="3";
       this.codigo5="4";
+      this.funtionmenu="false";
 
       
   });
@@ -109,6 +112,17 @@ export class HomePage {
             document.getElementById("14").style.display="none"
             document.getElementById("24").style.display="none"
           }
+           if(document.getElementById("33").style.display=="block"){
+            document.getElementById("33").style.display="none"
+          }else{
+            document.getElementById("33").style.display="block"
+            document.getElementById("13").style.display="none"
+            document.getElementById("23").style.display="none"
+          }
+        }
+//////////////////
+
+        if(codigo=="31"){
           if(document.getElementById("33").style.display=="block"){
             document.getElementById("33").style.display="none"
           }else{
@@ -117,7 +131,7 @@ export class HomePage {
             document.getElementById("23").style.display="none"
           }
         }
-
+       
       
       }
 
@@ -125,16 +139,20 @@ export class HomePage {
          // this.opensubmenu();
         //console.log(codigo);
         //console.log(document.getElementById(codigo));
+        if(codigo==0){
+             this.openSideMenu(); 
+         }
       if(this.cont == 10){
-
                 //document.getElementById("submenu").style.display="none"
-                document.getElementById(codigo).style.color="red"
+                if(codigo != 0){
+                  document.getElementById(codigo).style.color="red"
+                }
+                
                 if(codigo==0){
-                  document.getElementById(this.codigo2).style.display="none";
-                  document.getElementById(this.codigo3).style.display="none";
-                  document.getElementById(this.codigo4).style.display="none";
-                  document.getElementById("item1").style.display="";
-
+                 // document.getElementById(this.codigo2).style.display="none";
+                 // document.getElementById(this.codigo3).style.display="none";
+                 // document.getElementById(this.codigo4).style.display="none";
+                 // document.getElementById("item1").style.display="";
                   //document.getElementById("11").style.display="none";
                 }
                 if(codigo==1){
@@ -203,8 +221,7 @@ export class HomePage {
                 }
                 this.cont=0;
       }
-      ////////////////////
-      /*
+   
       if(this.cont == 50){
         document.getElementById(codigo).style.color="yellow"
         if((document.getElementById(codigo).id) =="0") {
@@ -232,9 +249,14 @@ export class HomePage {
           document.getElementById(this.codigo3).style.color="white"
 
         }
-      }*/
+      }
+    
               this.cont= this.cont+1;
               //console.log(this.cont);
       }
+      openSideMenu() {
+        this.menuCtrl.enable(true)
+         this.menuCtrl.toggle();    
+     }
  
 }
