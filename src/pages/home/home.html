@@ -11,30 +11,42 @@
     <ion-grid>
         <ion-row>
         <div  *ngFor="let styles of item" [style.background]="stylea">
-            <div  *ngFor="let stylesmenu of styles.stylesMenu" style="width: 2000px">
-              
+            <div  *ngFor="let stylesmenu of styles.stylesMenu" style="width: 2000px">        
                 <ion-col col-12 *ngFor="let itema of item"  >
                   <ion-col col-4 *ngFor="let itemb of itema.items" id="{{itemb.codigo}}2">
                     <!--{{itemb.codigo}}-->
-                    <div class="itemsSub">
-                      <button ion-button id="{{itemb.codigo}}" name="itemb.codigo" [style.background]="styleb" style="display:block" (click)="opensubmenu(itemb.codigo);orden(itemb.codigo);">{{itemb.nombre}} </button>
-                          <div id="{{itemb.codigo}}4" class="itemsSub-content" style="display:none">
-                            <div style="height: 30px;">About</div>
-                            <div style="height: 30px;">Base</div>
-                            <div style="height: 30px;">Blog</div>
-                          </div>
-                    </div>
+                        <div class="itemsSub" *ngFor="let stylebtn of itemb.stylesItem">
+                            
+                          <button ion-button id="{{itemb.codigo}}" name="itemb.codigo" style.background="{{stylebtn.backgroundcolorItem}}" style="display:block" (click)="opensubmenu(itemb.codigo);orden(itemb.codigo);">{{itemb.nombre}} </button>
+                              <div id="{{itemb.codigo}}4" class="itemsSub-content" style="display:none"> 
+                                <div *ngFor="let test of itemb.subItem" id="{{test.id}}5">
+                                  <div style="height: 30px;" id="{{test.id}}5" (click)="ordenby(test.id);">{{test.nombreSubItem}}</div>
+                                </div>
+								<div *ngFor="let test of itemb.subItem" id="{{test.id}}6" style="display:none">
+									
+                                  <div style="height: 30px;" id="{{test.id}}6" (click)="ordenby(test.id);">{{test.nombreSubItem}}</div>
+								  	
+                                </div>
+                              </div> 
+                            
+                        </div>
+              
                     </ion-col>
                 </ion-col>
             
                 <ion-col col-12 *ngFor="let itema of item" style="display:none" id="item1">
                   <ion-col col-4 *ngFor="let itemc of itema.items">
-                    <div class="itemsSub">
-                      <button id="{{itemc.codigo}}1" name="{{itemc.codigo}}" ion-button  (click)="opensubmenu(itemc.codigo);orden(itemc.codigo);">{{itemc.nombre}}</button>
-                      <div id="{{itemc.codigo}}3" class="itemsSub-content" style="display:none">
-                        <div style="height: 30px;">About</div>
-                        <div style="height: 30px;">Base</div>
-                        <div style="height: 30px;">Blog</div>
+                    <div class="itemsSub" *ngFor="let stylebtn2 of itemc.stylesItem">
+                      <button id="{{itemc.codigo}}1" name="{{itemc.codigo}}" ion-button style.background="{{stylebtn2.backgroundcolorItem}}"  (click)="opensubmenu(itemc.codigo);orden(itemc.codigo);">{{itemc.nombre}}</button>
+                      <div id="{{itemc.codigo}}3"  class="itemsSub-content" style="display:none">
+                          <div *ngFor="let test2 of itemc.subItem" id="{{test2.id}}7">
+                              <div style="height: 30px;" id="{{test2.id}}7" (click)="ordenby(test2.id);">{{test2.nombreSubItem}}</div>
+                          </div>
+						  <div *ngFor="let test2 of itemc.subItem" id="{{test2.id}}8" style="display:none">
+									
+                               <div style="height: 30px;" id="{{test2.id}}8" (click)="ordenby(test2.id);">{{test2.nombreSubItem}}</div>
+								  	
+                          </div>
                       </div>
                     </div>
                   </ion-col>
